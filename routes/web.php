@@ -10,7 +10,9 @@ Route::get('/', function () {
 Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index']);
 Route::get('login', [\App\Http\Controllers\LoginController::class, 'login'])->name('login');
 Route::post('login_action', [\App\Http\Controllers\LoginController::class, 'loginAction'])->name('login_action');
+
 Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
+Route::resource('user', \App\Http\Controllers\UserController::class);
 
 Route::get("call_name", [\App\Http\Controllers\BelajarController::class, 'getCallName']);
 Route::get("tambah", [\App\Http\Controllers\BelajarController::class, 'tambah'])->name('tambah');
