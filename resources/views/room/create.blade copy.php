@@ -13,33 +13,31 @@
                             <select name="category_id" id="" class="form-control">
                                 <option value="">Pilih Kategori Kamar</option>
                                 @foreach ($categories as $category)
-                                    <option {{ $category->id == $edit->category_id ? 'selected' : '' }}
-                                        value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Nama Kamar *</label>
                             <input type="text" class="form-control" name="name" placeholder="Masukkan Nama Kamar"
-                                required value="{{ $edit->name ?? '' }}">
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Harga *</label>
                             <input type="number" class="form-control" name="price" placeholder="Masukkan Harga Kamar"
-                                required value="{{ $edit->price ?? '' }}">
+                                required>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Fasilitas *</label>
-                            <textarea name="facility" type="text" id="" cols="30" rows="10" class="form-control">{{ $edit->facility ?? '' }}</textarea>
+                            <textarea name="facility" type="text" id="" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Deskripsi *</label>
-                            <textarea name="description" type="text" id="" cols="30" rows="10" class="form-control">{{ $edit->description ?? '' }}</textarea>
+                            <textarea name="description" type="text" id="" cols="30" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Gambar *</label>
                             <input type="file" name="image_cover" required>
-                            <img src="{{ asset('storage/' . $edit->image_cover) }}" width="100" alt="">
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary">Simpan</button>
