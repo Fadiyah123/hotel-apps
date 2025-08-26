@@ -18,16 +18,15 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Nama Tamu*</label>
                             <input type="text" class="form-control" name="nama_tamu" placeholder="Masukkan Nama"
-                                required>
+                                value="{{ $guest->nama_tamu }}">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Check_in*</label>
-                            <input type="date" value="{{ old('check_in') }}" class="form-control" name="check_in"
-                                required>
+                            <input type="date" value="{{ $guest->check_in }}" class="form-control" name="check_in">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Check_out*</label>
-                            <input type="date" class="form-control" name="check_out" required>
+                            <input type="date" class="form-control" name="check_out" value="{{ $guest->check_out }}">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">No Kamar*</label>
@@ -41,11 +40,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Email*</label>
-                            <input type="email" name="email" class="form-control" required>
+                            <input type="email" name="email" class="form-control" value="{{ $guest->email }}">
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">No Telpon*</label>
-                            <input type="number" name="no_tel" class="form-control" required>
+                            <input type="number" name="no_tel" class="form-control" value="{{ $guest->no_tel }}">
                         </div>
                         {{-- @dd($categories) --}}
                         <div class="mb-3">
@@ -59,15 +58,17 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Alamat*</label>
-                            <textarea class="form-control" name="alamat" cols="30" rows="5"></textarea>
+                            <textarea class="form-control" name="alamat" cols="30" rows="5">{{ $guest->alamat }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Kebutuhan Khusus</label><br>
-                            <input type="radio" name="statusnya" id="ada" onclick="toggleinput(true)"> Ada
-                            <input type="radio" name="statusnya" id="tidak"onclick="toggleinput(false)"> Tidak
+                            <input type="radio" name="statusnya" id="ada"
+                                {{ isset($guest->kebutuhan_khusus) ? 'checked' : '' }} onchange="toggleinput(true)"> Ada
+                            <input type="radio" {{ isset($guest->kebutuhan_khusus) ? 'checked' : '' }} name="statusnya"
+                                id="tidak" onchange="toggleinput(false)"> Tidak
                             Ada
-                            <input class="form-control" style="display: none" type="text" name="kebutuhan_khusus"
-                                id="kebutuhan_khusus">
+                            <input class="form-control" style="display: none" type="text"
+                                value="{{ $guest->kebutuhan_khusus }}" name="kebutuhan_khusus" id="kebutuhan_khusus">
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary">Simpan</button>

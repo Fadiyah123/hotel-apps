@@ -15,6 +15,9 @@ Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
 Route::resource('user', \App\Http\Controllers\UserController::class);
 Route::resource('categories', \App\Http\Controllers\CategoriesController::class);
 Route::resource('room', \App\Http\Controllers\RoomController::class);
+Route::resource('reservation', \App\Http\Controllers\ReservationsController::class);
+
+Route::get('get-room-by-category/{id}', [\App\Http\Controllers\ReservationsController::class, 'getRoomByCategory'])->name('get-room-by-category');
 
 Route::get("call_name", [\App\Http\Controllers\BelajarController::class, 'getCallName']);
 Route::get("tambah", [\App\Http\Controllers\BelajarController::class, 'tambah'])->name('tambah');
@@ -27,6 +30,6 @@ Route::post("store_bagi", [\App\Http\Controllers\BelajarController::class, 'stor
 Route::post("store_kali", [\App\Http\Controllers\BelajarController::class, 'storeKali'])->name('store_kali');
 
 Route::get("guestinformation", [\App\Http\Controllers\GuestController::class, 'index']);
-Route::get("create/guestinformation", [\App\Http\Controllers\GuestController::class, 'create']);
-Route::post("store/guestinformation", [\App\Http\Controllers\GuestController::class, 'store'])->name('guest.store');
-Route::get("edit/guestinformation", [\App\Http\Controllers\GuestController::class, 'guest.edit']);
+Route::get("guestinformation/create", [\App\Http\Controllers\GuestController::class, 'create']);
+Route::post("guestinformation/store", [\App\Http\Controllers\GuestController::class, 'store'])->name('guest.store');
+Route::get("guestinformation/edit/{id}", [\App\Http\Controllers\GuestController::class, 'edit'])->name('guest.edit');
