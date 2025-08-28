@@ -6,15 +6,34 @@ use Illuminate\Http\Request;
 use App\Models\Reservations;
 use App\Models\Rooms;
 use App\Models\Categories;
+use Carbon\Carbon;
 
 class ReservationsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function createReservationNumber()
+    {
+        // RSV-TODAY-001
+        $code_format = "RSV";
+        $today       = Carbon::now()->format('Ymd'); //20250828
+        $prefix      = $code_format . "-" . $today . "-";
+        
+        $lastReservation = Reservations::whereDate('created_at', Carbon::today())->orderBy('id', 'desc')->first();
+
+        if($lastReservation) {
+            $lastNumber = substr($lastReservation->reservation_number, -3);
+            $newNumber  = str_pad($lastNumber, 3, "0", STR_PAD_LEFT);
+        } else {
+            $newNumber = "001";
+        }
+        $reservation_number = $prefix . $newNumber;
+        return $reservation_number;
+    }
     public function index()
     {
-        $datas = Reservations::orderBy('id', 'desc')->get();
+        $datas = Reservations::with('room')->orderBy('id', 'desc')->get();
         $title = "Data Reservasi";
         return view('reservation.index', compact('datas', 'title'));
     }
@@ -24,8 +43,9 @@ class ReservationsController extends Controller
      */
     public function create()
     {
+        $reservation_number = $this->createReservationNumber();
         $categories = Categories::get();
-        return view('reservation.create', compact('categories'));
+        return view('reservation.create', compact('categories', 'reservation_number'));
     }
 
     /**
@@ -64,6 +84,7 @@ class ReservationsController extends Controller
                 'room_id' => $request->room_id,
                 'subtotal' => $request->subtotal,
                 'totalAmount' =>  $request->totalAmount,
+                'isReserve' => 1,
             ];
             $create = Reservations::create($data);
             return response()
